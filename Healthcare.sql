@@ -1,0 +1,215 @@
+create database Healthcare;
+use Healthcare;
+SET SQL_SAFE_UPDATES = 1;
+CREATE TABLE hospital (
+    FAC_NO INT,  -- Primary Key
+    FAC_NAME VARCHAR(255),
+    YEAR_QTR VARCHAR(10),
+    BEG_DATE DATE,
+    END_DATE DATE,
+    COUNTY_NAME VARCHAR(255),
+    TYPE_CNTRL VARCHAR(50),
+    TYPE_HOSP VARCHAR(50),
+    LIC_BEDS INT,
+    AVL_BEDS INT,
+    STF_BEDS INT,
+    DIS_MCAR INT,
+    DIS_MCAR_MC INT,
+    DIS_MCAL INT,
+    DIS_MCAL_MC INT,
+    DIS_CNTY INT,
+    DIS_CNTY_MC INT,
+    DIS_THRD INT,
+    DIS_THRD_MC INT,
+    DIS_INDGNT INT,
+    DIS_OTH INT,
+    DIS_TOT INT,
+    DIS_LTC INT,
+    DAY_MCAR INT,
+    DAY_MCAR_MC INT,
+    DAY_MCAL INT,
+    DAY_MCAL_MC INT,
+    DAY_CNTY INT,
+    DAY_CNTY_MC INT,
+    DAY_THRD INT,
+    DAY_THRD_MC INT,
+    DAY_INDGNT INT,
+    DAY_OTH INT,
+    DAY_TOT INT,
+    DAY_LTC INT,
+    VIS_MCAR INT,
+    VIS_MCAR_MC INT,
+    VIS_MCAL INT,
+    VIS_MCAL_MC INT,
+    VIS_CNTY INT,
+    VIS_CNTY_MC INT,
+    VIS_THRD INT,
+    VIS_THRD_MC INT,
+    VIS_INDGNT INT,
+    VIS_OTH INT,
+    VIS_TOT INT,
+    GRIP_MCAR DECIMAL(15, 2),
+    GRIP_MCAR_MC DECIMAL(15, 2),
+    GRIP_MCAL DECIMAL(15, 2),
+    GRIP_MCAL_MC DECIMAL(15, 2),
+    GRIP_CNTY DECIMAL(15, 2),
+    GRIP_CNTY_MC DECIMAL(15, 2),
+    GRIP_THRD DECIMAL(15, 2),
+    GRIP_THRD_MC DECIMAL(15, 2),
+    GRIP_INDGNT DECIMAL(15, 2),
+    GRIP_OTH DECIMAL(15, 2),
+    GRIP_TOT DECIMAL(15, 2),
+    GROP_MCAR DECIMAL(15, 2),
+    GROP_MCAR_MC DECIMAL(15, 2),
+    GROP_MCAL DECIMAL(15, 2),
+    GROP_MCAL_MC DECIMAL(15, 2),
+    GROP_CNTY DECIMAL(15, 2),
+    GROP_CNTY_MC DECIMAL(15, 2),
+    GROP_THRD DECIMAL(15, 2),
+    GROP_THRD_MC DECIMAL(15, 2),
+    GROP_INDGNT DECIMAL(15, 2),
+    GROP_OTH DECIMAL(15, 2),
+    GROP_TOT DECIMAL(15, 2),
+    BAD_DEBT DECIMAL(15, 2),
+    CADJ_MCAR DECIMAL(15, 2),
+    CADJ_MCAR_MC DECIMAL(15, 2),
+    CADJ_MCAL DECIMAL(15, 2),
+    CADJ_MCAL_MC DECIMAL(15, 2),
+    DISP_855 DECIMAL(15, 2),
+    CADJ_CNTY DECIMAL(15, 2),
+    CADJ_CNTY_MC DECIMAL(15, 2),
+    CADJ_THRD DECIMAL(15, 2),
+    CADJ_THRD_MC DECIMAL(15, 2),
+    CHAR_OTH DECIMAL(15, 2),
+    SUB_INDGNT DECIMAL(15, 2),
+    TCH_ALLOW DECIMAL(15, 2),
+    TCH_SUPP DECIMAL(15, 2),
+    DED_OTH DECIMAL(15, 2),
+    DED_TOT DECIMAL(15, 2),
+    CAP_MCAR DECIMAL(15, 2),
+    CAP_MCAL DECIMAL(15, 2),
+    CAP_CNTY DECIMAL(15, 2),
+    CAP_THRD DECIMAL(15, 2),
+    CAP_TOT DECIMAL(15, 2),
+    NET_MCAR DECIMAL(15, 2),
+    NET_MCAR_MC DECIMAL(15, 2),
+    NET_MCAL DECIMAL(15, 2),
+    NET_MCAL_MC DECIMAL(15, 2),
+    NET_CNTY DECIMAL(15, 2),
+    NET_CNTY_MC DECIMAL(15, 2),
+    NET_THRD DECIMAL(15, 2),
+    NET_THRD_MC DECIMAL(15, 2),
+    NET_INDGNT DECIMAL(15, 2),
+    NET_OTH DECIMAL(15, 2),
+    NET_TOT DECIMAL(15, 2),
+    OTH_OP_REV DECIMAL(15, 2),
+    TOT_OP_EXP DECIMAL(15, 2),
+    PHY_COMP DECIMAL(15, 2),
+    NONOP_REV DECIMAL(15, 2),
+    DIS_PIPS DECIMAL(15, 2),
+    DAY_PIPS DECIMAL(15, 2),
+    EXP_PIPS DECIMAL(15, 2),
+    EXP_POPS DECIMAL(15, 2),
+    CAP_EXP DECIMAL(15, 2),
+    FIX_ASSETS DECIMAL(15, 2),
+    DISP_TRNFR DECIMAL(15, 2),
+    DIS_TOT_CC DECIMAL(15, 2),
+    PAT_DAY_TOT_CC INT,
+    TOT_OUT_VIS_CC INT,
+    GROS_INPAT_REV_CC DECIMAL(15, 2),
+    GROS_OUTPAT_REV_CC DECIMAL(15, 2),
+    CONTR_ADJ_CC DECIMAL(15, 2),
+    OTHR_DEDUCT_CC DECIMAL(15, 2),
+    CAP_PREM_REV_CC DECIMAL(15, 2),
+    NET_PAT_REV_CC DECIMAL(15, 2)
+);
+
+drop table hospital;
+desc hospital;
+select* from hospital limit 10;
+SELECT COUNT(*) AS total_rows FROM hospital;
+
+SELECT COUNT(*) AS total_columns
+FROM information_schema.columns
+WHERE table_name = 'hospital' AND table_schema = 'healthcare';
+
+# KPIs :
+
+-- 1. Total Discharge (DIS_TOT)
+SELECT SUM(DIS_TOT) AS Total_Discharge FROM hospital;
+
+-- 2. Patient Days (DAY_TOT)
+SELECT SUM(DAY_TOT) AS Total_Patient_Days
+FROM hospital;
+
+-- 3. Net Patient Revenue (NET_TOT)
+SELECT SUM(NET_TOT) AS Net_Patient_Revenue
+FROM hospital;
+
+-- 4. Revenue Trend (Over Time)
+SELECT year(BEG_DATE),SUM(NET_TOT) AS Yearly_Revenue_Trend
+FROM hospital group by year(BEG_DATE);
+
+-- 5. State-wise Number of Hospitals/Revenue (COUNTY_NAME & NET_TOT)
+SELECT COUNTY_NAME, COUNT(distinct FAC_NO) AS Number_of_Hospitals, SUM(NET_TOT) AS Total_Revenue
+FROM hospital
+GROUP BY COUNTY_NAME;
+
+-- 6. Type of Hospital Revenue (TYPE_HOSP & NET_TOT)
+SELECT TYPE_HOSP, SUM(NET_TOT) AS Revenue_By_Hospital_Type
+FROM hospital
+GROUP BY TYPE_HOSP;
+
+SELECT TYPE_CNTRL, SUM(NET_TOT) AS Revenue_By_Hospital_Type
+FROM hospital
+GROUP BY TYPE_CNTRL;
+
+
+
+
+-- 7. QTD and YTD Revenue
+SELECT 
+    DISTINCT YEAR(BEG_DATE) AS Year,
+    (BEG_DATE) AS Quarter,
+    -- QTD Calculation
+    SUM(NET_TOT) OVER (PARTITION BY YEAR(BEG_DATE), QUARTER(BEG_DATE) ORDER BY BEG_DATE) AS QTD_Revenue,
+    -- YTD Calculation
+    SUM(NET_TOT) OVER (PARTITION BY YEAR(BEG_DATE) ORDER BY BEG_DATE) AS YTD_Revenue
+FROM 
+    hospital
+ORDER BY 
+    YEAR(BEG_DATE), QUARTER(BEG_DATE);
+    
+    SELECT 
+    YEAR(BEG_DATE) AS Year,
+    QUARTER(BEG_DATE) AS Quarter,
+    -- QTD Calculation
+    SUM(NET_TOT) OVER (PARTITION BY YEAR(BEG_DATE), QUARTER(BEG_DATE) ORDER BY BEG_DATE) AS QTD_Revenue,
+    -- YTD Calculation
+    SUM(NET_TOT) OVER (PARTITION BY YEAR(BEG_DATE) ORDER BY BEG_DATE) AS YTD_Revenue
+FROM 
+    hospital;
+    
+    SELECT 
+    YEAR(BEG_DATE) AS Year,
+    QUARTER(BEG_DATE) AS Quarter,
+    SUM(NET_TOT) OVER (PARTITION BY YEAR(BEG_DATE), QUARTER(BEG_DATE) ORDER BY BEG_DATE) AS QTD_Revenue
+FROM 
+    hospital;
+
+
+
+-- 8. Total Patients and Hospitals (DIS_TOT & FAC_NO)
+SELECT COUNT(distinct FAC_NAME) AS Total_Hospitals, SUM(DIS_TOT) AS Total_Patients
+FROM hospital;
+
+
+
+
+
+
+
+
+
+
+
